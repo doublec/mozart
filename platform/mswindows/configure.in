@@ -57,6 +57,15 @@ esac
 AC_SUBST(CXX)
 AC_SUBST(BINDIRNAME)
 
+case $platform in
+    win32*)
+        WINSRCDIR=`cmd //c echo "$srcdir"`
+        AC_SUBST(WINSRCDIR)
+	;;
+    *)
+	;;
+esac
+
 AC_CHECK_TOOL(AR, ar)
 AC_CHECK_TOOL(WINDRES, windres)
 

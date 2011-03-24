@@ -51,7 +51,11 @@ void OZ_error(const char *format, ...)
 #if defined(DEBUG_CHECK)
    fprintf(stderr, "Waiting 10 secs... hook up (pid %d)!\n", getpid());
    fflush(stderr);
+#ifdef WIN32
+   Sleep(10000);
+#else
    sleep(10);
+#endif
 #endif
   va_list ap;
   va_start(ap,format);

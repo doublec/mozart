@@ -1545,15 +1545,14 @@ AC_DEFUN(OZ_OZLOADWIN,[
 changequote(<,>)
   case $PLATFORM in
     win32*)
-	oztmp=`pwd`
-	oztmp=`cygpath -a -w "$oztmp"`
+	oztmp=`pwd -W`
 	oztmp=`expr "$oztmp" : "\(.\):"`
 	if test -n "$oztmp"; then
 	  oztmplo=`echo $oztmp | tr '[:upper:]' '[:lower:]'`
 	  oztmphi=`echo $oztmp | tr '[:lower:]' '[:upper:]'`
 	  oz_cv_OZLOADWIN="%prefix=${oztmplo}:/=${oztmplo}:/%prefix=${oztmphi}:/=${oztmphi}:/"
 	fi
-	oztmp=`cygpath -a -w "$srcdir"`
+	oztmp=`cmd //c echo "$srcdir"`
 	oztmp=`expr "$oztmp" : "\(.\):"`
 	if test -n "$oztmp"; then
 	  oztmplo=`echo $oztmp | tr '[:upper:]' '[:lower:]'`

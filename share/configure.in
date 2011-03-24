@@ -54,10 +54,10 @@ dnl *****************************************************************
 
 case $platform in
 win32*)
-    oztmp=`${SRCTOP}/share/lib/cygpath.sh "${SRCTOP}/platform/mswindows/ozwrapper.bin"`
+    oztmp=`cmd //c echo "${SRCTOP}/platform/mswindows/ozwrapper.bin"`
     OZEXECFILE="--execfile=\"$oztmp\""
     EMULATOR_EXE=emulator.dll
-    BOOTOZTOOL='$(shell $(CYG_PATH) "$(BUILDTOP)/platform/mswindows/oztool.exe")'
+    BOOTOZTOOL='"$(BUILDTOP)/platform/mswindows/oztool.exe"'
     WINOZTOOLCXXFLAGS='$(BOOTOZTOOLINC)'
     WINOZTOOLLDFLAGS='-inc $(BUILDTOP)/platform/emulator'
     EXE_EXT='.exe'

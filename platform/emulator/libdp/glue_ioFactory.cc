@@ -34,6 +34,9 @@
 #include <arpa/inet.h>
 #include <netdb.h>
 #include <net/if.h>
+#else
+#include <errno.h>
+#include <winsock.h>
 #endif
 
 /************* I/O ************************/

@@ -15,6 +15,14 @@ case `uname -s` in
 	    ;;
 	esac
 	;;
+    MINGW32*)
+        pathname=`cmd //c echo "$1"`
+#        dirname=`dirname "$1"`
+#        basename=`basename "$1"`
+#        pathname=`cd "$dirname" && pwd -W && cd - >/dev/null`
+#        echo "$pathname/$basename"
+	echo "$pathname"
+	;;
     *)
 	echo "$1"
 	;;

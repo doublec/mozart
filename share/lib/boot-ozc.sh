@@ -46,10 +46,10 @@ fi
 
 case $OZPLATFORM in
     win32*)
-	OZEMULATOR=`cygpath -w $OZEMULATOR`
-	OZINIT=`cygpath -w $OZBOOTINIT`
+	OZEMULATOR=`cmd //c echo "$OZEMULATOR"`
+	OZINIT=`cmd //c echo "$OZBOOTINIT"`
 	export OZEMULATOR OZINIT
-	exec $BUILDTOP/platform/mswindows/ozengine `cygpath -w $OZBOOTOZC` "$@"
+	exec $BUILDTOP/platform/mswindows/ozengine $OZBOOTOZC "$@"
 	;;
     *)
 	exec $OZEMULATOR -init $OZBOOTINIT -u $OZBOOTOZC -- "$@"

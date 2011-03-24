@@ -1293,15 +1293,14 @@ else
 
   case $PLATFORM in
     win32*)
-	oztmp=`pwd`
-	oztmp=`cygpath -a -w "$oztmp"`
+	oztmp=`pwd -W`
 	oztmp=`expr "$oztmp" : "\(.\):"`
 	if test -n "$oztmp"; then
 	  oztmplo=`echo $oztmp | tr '[:upper:]' '[:lower:]'`
 	  oztmphi=`echo $oztmp | tr '[:lower:]' '[:upper:]'`
 	  oz_cv_OZLOADWIN="%prefix=${oztmplo}:/=${oztmplo}:/%prefix=${oztmphi}:/=${oztmphi}:/"
 	fi
-	oztmp=`cygpath -a -w "$srcdir"`
+	oztmp=`cmd //c echo "$srcdir"`
 	oztmp=`expr "$oztmp" : "\(.\):"`
 	if test -n "$oztmp"; then
 	  oztmplo=`echo $oztmp | tr '[:upper:]' '[:lower:]'`
@@ -1323,7 +1322,7 @@ echo "$ac_t""$oz_cv_OZLOADWIN" 1>&6
 
 
 echo $ac_n "checking for --enable-contrib""... $ac_c" 1>&6
-echo "configure:1327: checking for --enable-contrib" >&5
+echo "configure:1326: checking for --enable-contrib" >&5
 # Check whether --enable-contrib or --disable-contrib was given.
 if test "${enable_contrib+set}" = set; then
   enableval="$enable_contrib"
@@ -1340,7 +1339,7 @@ else
 fi
 
 echo $ac_n "checking for --enable-doc""... $ac_c" 1>&6
-echo "configure:1344: checking for --enable-doc" >&5
+echo "configure:1343: checking for --enable-doc" >&5
 # Check whether --enable-doc or --disable-doc was given.
 if test "${enable_doc+set}" = set; then
   enableval="$enable_doc"
@@ -1364,7 +1363,7 @@ else
 fi
 
 echo $ac_n "checking for --enable-subdirs""... $ac_c" 1>&6
-echo "configure:1368: checking for --enable-subdirs" >&5
+echo "configure:1367: checking for --enable-subdirs" >&5
 # Check whether --enable-subdirs or --disable-subdirs was given.
 if test "${enable_subdirs+set}" = set; then
   enableval="$enable_subdirs"
@@ -1391,7 +1390,7 @@ echo "$ac_t""$oz_subdirs" 1>&6
 
 
 echo $ac_n "checking for --with-stdlib""... $ac_c" 1>&6
-echo "configure:1395: checking for --with-stdlib" >&5
+echo "configure:1394: checking for --with-stdlib" >&5
 # Check whether --with-stdlib or --without-stdlib was given.
 if test "${with_stdlib+set}" = set; then
   withval="$with_stdlib"
@@ -1786,7 +1785,7 @@ if test "$no_recursion" != yes; then
       fi
     fi
 
-    cd "$ac_popdir"
+    cd $ac_popdir
   done
 fi
 

@@ -1285,15 +1285,14 @@ else
 
   case $PLATFORM in
     win32*)
-	oztmp=`pwd`
-	oztmp=`cygpath -a -w "$oztmp"`
+	oztmp=`pwd -W`
 	oztmp=`expr "$oztmp" : "\(.\):"`
 	if test -n "$oztmp"; then
 	  oztmplo=`echo $oztmp | tr '[:upper:]' '[:lower:]'`
 	  oztmphi=`echo $oztmp | tr '[:lower:]' '[:upper:]'`
 	  oz_cv_OZLOADWIN="%prefix=${oztmplo}:/=${oztmplo}:/%prefix=${oztmphi}:/=${oztmphi}:/"
 	fi
-	oztmp=`cygpath -a -w "$srcdir"`
+	oztmp=`cmd //c echo "$srcdir"`
 	oztmp=`expr "$oztmp" : "\(.\):"`
 	if test -n "$oztmp"; then
 	  oztmplo=`echo $oztmp | tr '[:upper:]' '[:lower:]'`
@@ -1317,7 +1316,7 @@ echo "$ac_t""$oz_cv_OZLOADWIN" 1>&6
     if test -z "$WITH_GLOBAL_OZ"; then
       
   echo $ac_n "checking for --with-global-oz""... $ac_c" 1>&6
-echo "configure:1321: checking for --with-global-oz" >&5
+echo "configure:1320: checking for --with-global-oz" >&5
   # Check whether --with-global-oz or --without-global-oz was given.
 if test "${with_global_oz+set}" = set; then
   withval="$with_global_oz"
@@ -1351,7 +1350,7 @@ fi
     # Extract the first word of "gawk awk", so it can be a program name with args.
 set dummy gawk awk; ac_word=$2
 echo $ac_n "checking for $ac_word""... $ac_c" 1>&6
-echo "configure:1355: checking for $ac_word" >&5
+echo "configure:1354: checking for $ac_word" >&5
 if eval "test \"`echo '$''{'ac_cv_path_AWK'+set}'`\" = set"; then
   echo $ac_n "(cached) $ac_c" 1>&6
 else
@@ -1396,7 +1395,7 @@ fi
 
 
 echo $ac_n "checking for --with-stdlib""... $ac_c" 1>&6
-echo "configure:1400: checking for --with-stdlib" >&5
+echo "configure:1399: checking for --with-stdlib" >&5
 # Check whether --with-stdlib or --without-stdlib was given.
 if test "${with_stdlib+set}" = set; then
   withval="$with_stdlib"

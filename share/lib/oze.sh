@@ -39,8 +39,8 @@ shift
 
 case $OZPLATFORM in
     win32*)
-	OZEMULATOR=`cygpath -w $OZEMULATOR`
-	OZINIT=`cygpath -w $OZINIT`
+	OZEMULATOR=`cmd //c echo "$OZEMULATOR"`
+	OZINIT=`cmd //c echo "$OZINIT"`
 	export OZEMULATOR OZINIT
 	exec $BUILDTOP/platform/mswindows/ozengine $url "$@"
 	;;

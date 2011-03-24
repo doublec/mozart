@@ -36,7 +36,7 @@ INSTALL_FILE	= $(INSTALL) -m 444
 INSTALL_DIR	= @INSTALL_DIR@
 
 COMPILE_ELISP	= @COMPILE_ELISP@
-ELFILES		= oz.el mozart.el oz-extra.el oz-server.el
+ELFILES		= oz.el oz-server.el mozart.el oz-extra.el
 ELCFILES	= $(addsuffix c,$(ELFILES))
 ifeq ($(COMPILE_ELISP),yes)
 TARGETS		= $(ELFILES) $(ELCFILES)
@@ -67,7 +67,7 @@ mozart.el: mozart.el.in ../config.status
 mozart.elc: oz.elc
 
 $(ELCFILES): %.elc : %.el
-	$(EMACS) --eval "(setq load-path (cons \"$(CYG_SRCDIR)\" load-path))" -q -batch -f batch-byte-compile $(shell $(CYGPATH) "$<") && \
+	$(EMACS) --eval "(setq load-path (cons default-directory load-path))" -q -batch -f batch-byte-compile $(shell $(CYGPATH) "$<") && \
 	if [ $<c != $@ ]; then mv $<c $@; fi
 
 install: all $(ELISPDIR) $(LIBFILES)

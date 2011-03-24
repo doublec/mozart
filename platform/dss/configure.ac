@@ -199,7 +199,7 @@ AC_MSG_RESULT(found $host_os)
 dnl Check for special cygwin environment
 DYNLD="\$(CXX) -shared -Wl,-soname,\$@"
 case "$host_os" in
-    *cygwin)
+    *cygwin|*mingw*)
         AC_MSG_RESULT(-- adding cygwin environment --)
 	CREATE_OBJS="%.o : \$(SRCDIR)/%.cc"
 	CREATE_OBJS_COMMAND="\$(CXX) \$(CXXFLAGS) -c \$(SRCDIR)/\$*.cc -o \$*.o"

@@ -70,7 +70,9 @@ case $system in
    ;;
    *i386*NETBSD*)	OZARCH=netbsd-i486
    ;;
-   *i[4567]86*CYGWIN*)       OZARCH=win32-i486
+   *i[4567]86*CYGWIN*)  OZARCH=win32-i486
+   ;;
+   *i[4567]86*MINGW32*) OZARCH=win32-i486
    ;;
    *Power*Mac*Rhapsody*) OZARCH=rhapsody-powermac
    ;;

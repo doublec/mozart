@@ -107,10 +107,9 @@ endif
 ### IFEQ END ---------------------------------------------------------
 
 installwindlls: $(PLATFORMDIR)
-	$(INSTALL) $(WINDLLDIR)/tcl84.dll $(PLATFORMDIR)
-	$(INSTALL) $(WINDLLDIR)/tk84.dll $(PLATFORMDIR)
-	$(INSTALL) $(WINDLLDIR)/tclpip84.dll $(PLATFORMDIR)
-	$(INSTALL) $(WINDLLDIR)/msvcrt.dll $(PLATFORMDIR)
+	$(INSTALL) $(WINDLLDIR)/tcl85.dll $(PLATFORMDIR)
+	$(INSTALL) $(WINDLLDIR)/tk85.dll $(PLATFORMDIR)
+	$(INSTALL) $(WINDLLDIR)/tclpip85.dll $(PLATFORMDIR)
 
 nothing:
 

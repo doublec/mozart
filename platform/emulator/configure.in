@@ -423,8 +423,15 @@ CXXFLAGS=$savedKPCXXFLAGS
 AC_LANG_RESTORE])
 
 if test $ac_cv_understand_export_dynamic = yes; then
-    AC_MSG_RESULT([yes, will use it!])
-    EMULDFLAGS="$EMULDFLAGS -Wl,--export-dynamic"
+  case $platform in
+    win32*)
+	AC_MSG_RESULT([yes, but ignored on PE systems])
+	;;
+    *)
+        AC_MSG_RESULT([yes, will use it!])
+        EMULDFLAGS="$EMULDFLAGS -Wl,--export-dynamic"
+	;;
+  esac
 else
     AC_MSG_RESULT([no])
 fi
@@ -1433,7 +1440,11 @@ dnl *****************************************************************
 
 AC_MSG_CHECKING(whether socklen_t is declared...)
 dnl AC_TRY_COMPILE([
-dnl #include <sys/socket.h>],
+dnl #ifdef WIN32],
+dnl [#include <winsock.h>],
+dnl [#else],
+dnl [#include <sys/socket.h>],
+dnl [#endif],
 dnl     [socklen_t gaga;],
 dnl     [AC_MSG_RESULT(yes (-DHAVE_SOCKLEN_T))
 dnl      AC_DEFINE(HAVE_SOCKLEN_T)])
