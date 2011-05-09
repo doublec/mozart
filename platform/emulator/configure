@@ -9879,7 +9879,7 @@ int main(void) {
       (*((int *) && lb1)==2)) {
     return 0;
   } 
-  return -1;
+  return 1;
     
 }
 static int nonsense(int i) {
@@ -9961,7 +9961,7 @@ int main(void) {
       (*((int *) && lb1)==2)) {
     return 0;
   } 
-  return -1;
+  return 1;
     
 }
 static int nonsense(int i) {
