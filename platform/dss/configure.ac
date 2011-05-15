@@ -229,6 +229,11 @@ case "$host_cpu" in
 	AC_MSG_RESULT($host_cpu architecture)
 	CPU_FLAGS="-mtune=$host_cpu -DBIG_ENDIAN_HOST"
     ;;
+    *apple-darwin*)
+	AC_MSG_RESULT($host_cpu architecture)
+	CPU_FLAGS="-mtune=$host-cpu -mtune=$host_cpu -m32"
+	DYNLD="\$(CXX) -m32 -shared -Wl,-soname,\$@"
+    ;;
     x86_64)
         AC_MSG_RESULT(x86_64 CPU)
         CPU_FLAGS="-march=i586 -mtune=native -m32"
