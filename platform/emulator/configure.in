@@ -342,6 +342,11 @@ case $platform in
         TOOLLDCMD="ld"
 	oz_enable_modules_static=yes
 	;;
+    linux-x86_64)
+        TOOLLDCMD="gcc -shared"
+        LDFLAGS="$LDFLAGS"
+	: ${oz_enable_modules_static=no}
+	;;
     linux-x86_64_32)
         TOOLLDCMD="gcc -shared"
         LDFLAGS="$LDFLAGS -m32"
