@@ -1381,6 +1381,10 @@ darwin-x86_64_32)
     PICOPTIONSCC="-fPIC -fpic -Kpic"
     PICOPTIONSEXTRA="-fno-common"
     ;;
+linux-x86_64)
+    PICOPTIONS="-fpic -Kpic"
+    PICOPTIONSCC="-fpic -Kpic"
+    ;;
 linux-x86_64_32)
     PICOPTIONS="-m32 -fpic -Kpic"
     PICOPTIONSCC="-m32 -fpic -Kpic"
