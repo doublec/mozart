@@ -77,8 +77,9 @@ extern "C" {
 /* ------------------------------------------------------------------------ *
  * I. type declarations
  * ------------------------------------------------------------------------ */
+#include <stdint.h>
 
-typedef unsigned int OZ_Term;
+typedef uintptr_t OZ_Term;
 
 typedef unsigned int OZ_Return;
 
@@ -707,7 +708,6 @@ VAR = OZ_vsToC(OZ_in(ARG),&LEN);
 #if defined(__cplusplus)
 
 #include <stdlib.h>
-#include <stdint.h>
 
 /* some internal functions to make the extension class work */
 _FUNDECL(void*,_OZ_new_OZ_Extension,(size_t n));
