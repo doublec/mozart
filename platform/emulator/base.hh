@@ -47,6 +47,7 @@
 #include "ozostream.hh"
 
 #include <string.h>
+#include <stdint.h>
 
 #ifdef __FCC_VERSION
 #undef HAVE_STRDUP
@@ -141,7 +142,7 @@ typedef PosInt XReg;
 typedef PosInt YReg;
 typedef PosInt GReg;
 
-typedef unsigned int32 TaggedRef;
+typedef uintptr_t TaggedRef;
 
 typedef unsigned int32 crc_t;
 
