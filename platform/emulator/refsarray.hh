@@ -39,7 +39,7 @@
 
 class RefsArray {
 private:
-  int       _len;
+  uintptr_t       _len;
   TaggedRef _a[1];
 
 public:
@@ -57,11 +57,11 @@ public:
   }
 
   void cacMark(RefsArray * fwd) {
-    _len = ((int) fwd) | 1;
+    _len = ((uintptr_t) fwd) | 1;
   }
   
-  int32 ** cacGetMarkField(void) {
-    return (int32 **) &_len;
+  uintptr_t ** cacGetMarkField(void) {
+    return (uintptr_t **) &_len;
   }
 
   RefsArray * cacGetFwd(void) {

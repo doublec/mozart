@@ -54,7 +54,7 @@ public:
    */
 
   TeType getTeType(void) {
-    return (TeType) (int) Stack::topElem();
+    return (TeType) (int) (uintptr_t) Stack::topElem();
   }
 
   Bool isEmptyChunk() { 

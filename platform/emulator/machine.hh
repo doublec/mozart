@@ -36,10 +36,10 @@
 
 
 /* a 32 bit integer, the same on alpha and other machines */
-#define int32 int
+#define int32 int32_t
 
 /* a 32 bit unsigned integer */
-#define uint32 unsigned int
+#define uint32 uint32_t
 
 #define intlong long
 
@@ -75,19 +75,19 @@
 
 /* convert an uint32 to a pointer and vice versa */
 #define _ToPointer(i) ((void*) (i)) 
-#define _ToInt32(p) ((uint32)(p))
+#define _ToInt32(p) ((uintptr_t)(p))
 #ifdef DEBUG_CHECK
-inline void* ToPointer(uint32 i) { return _ToPointer(i); }
-inline uint32 ToInt32(const void *p) { return _ToInt32(p); }
-inline uint32 ToInt32(uint32 t) { return t; }
+inline void* ToPointer(uintptr_t i) { return _ToPointer(i); }
+inline uintptr_t ToInt32(const void *p) { return _ToInt32(p); }
+inline uintpr_t ToInt32(uintpr_t t) { return t; }
 #else
 #define ToPointer(i) _ToPointer(i)
 #define ToInt32(p)   _ToInt32(p)
 #endif
 
 /* (un)set bits in a pointer */
-inline void *orPointer(void *p, int i)  { return (void*) ((intlong)p|(intlong)i); }
-inline void *andPointer(void *p, int i) { return (void*) ((intlong)p&(intlong)i); }
+inline void *orPointer(void *p, int i)  { return (void*) ((uintptr_t)p|(uintptr_t)i); }
+inline void *andPointer(void *p, int i) { return (void*) ((uintptr_t)p&(uintptr_t)i); }
 
 #ifdef THREADED
 

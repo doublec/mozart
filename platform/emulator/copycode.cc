@@ -31,11 +31,11 @@
 
 #define CheckHTPtr(Type,Ptr)				\
   Type aux = (Type) ht->htFind(Ptr);			\
-  if ((uint32)ToInt32(aux) != ToInt32(htEmpty))		\
+  if ((uintptr_t)ToInt32(aux) != ToInt32(htEmpty))		\
     return aux;
 #define CheckHTVal(Type,Val)				\
   Type aux = (Type) ht->htFind(ToPointer(Val));		\
-  if ((uint32)ToInt32(aux) != ToInt32(htEmpty))		\
+  if ((uintptr_t)ToInt32(aux) != ToInt32(htEmpty))		\
     return aux;
 
 static

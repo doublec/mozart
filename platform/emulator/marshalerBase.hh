@@ -387,7 +387,7 @@ void marshalStringNum(MarshalerBuffer *bs, const char *s, int num) {
 //
 #define rememberLocation(lIT, bs, p)				\
 {								\
-  int index = lIT->getSize();					\
+  uintptr_t index = lIT->getSize();					\
   lIT->htAdd((void *) p, ToPointer(index));			\
   marshalTermDef(bs, index);					\
 }

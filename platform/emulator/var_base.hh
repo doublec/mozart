@@ -161,7 +161,7 @@ private:
 		 u_ct   = OZ_VAR_CT, 
 		 u_mask = 3};
 
-  unsigned int homeAndFlags;
+  uintptr_t homeAndFlags;
 protected:
   SuspList * suspList;
 
@@ -181,12 +181,12 @@ public:
 
   OzVariable() { Assert(0); }
   OzVariable(TypeOfVariable t, Board *bb) : suspList(NULL) {
-    homeAndFlags=(unsigned int)bb;
+    homeAndFlags=(uintptr_t)bb;
     setType(t);
   }
 
   void initAsExtension(Board*bb) {
-    homeAndFlags=(unsigned int)bb;
+    homeAndFlags=(uintptr_t)bb;
     suspList = 0;
     setType(OZ_VAR_EXT);
   }

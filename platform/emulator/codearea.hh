@@ -99,7 +99,7 @@ public:
 
 
 #ifdef THREADED
-  typedef uint32 AdressOpcode;
+  typedef uintptr_t AdressOpcode;
 #else
   typedef Opcode AdressOpcode; 
 #endif
@@ -283,7 +283,7 @@ public:
     return writeWord(i,ptr);    
   }
 
-  static ProgramCounter writeLabel(int label, int offset, ProgramCounter ptr)
+  static ProgramCounter writeLabel(uintptr_t label, int offset, ProgramCounter ptr)
   {
     return writeWord(ToPointer(label-offset), ptr);    
   }
@@ -479,15 +479,15 @@ GReg getGRegArg(ProgramCounter PC) {
  */
 
 class InlineCache {
-  uint32 key;
-  int32 value;
+  uintptr_t key;
+  uintptr_t value;
       
 public:
   InlineCache() { key = value = 0; } 
 
   int lookup(SRecord *rec, TaggedRef feature)
   {
-    if (key!=(uint32)rec->getSRecordArity()) {
+    if (key!=(uintptr_t)rec->getSRecordArity()) {
       int32 aux = rec->getIndex(feature);
       if (aux==-1)
 	return aux;
@@ -611,7 +611,7 @@ extern OZ_Location * OZ_ID_LOC;
 #else
 
 #define XRegToInt(N) ((N) / sizeof(TaggedRef))
-#define XRegToPtr(N) ((TaggedRef *) (((intlong) XREGS) + (N)))
+#define XRegToPtr(N) ((TaggedRef *) (((uintptr_t) XREGS) + (N)))
 
 #endif
 
@@ -619,7 +619,7 @@ extern OZ_Location * OZ_ID_LOC;
 #define YRegToPtr(Y,N) Y->getFastArgRef(N)
 
 #define GRegToInt(N) ((N) / sizeof(TaggedRef))
-#define GRegToPtr(G,N) ((TaggedRef *) (((intlong) (G)) + (N)))
+#define GRegToPtr(G,N) ((TaggedRef *) (((uintptr_t) (G)) + (N)))
 
 #else
 

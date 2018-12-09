@@ -257,7 +257,7 @@ public:
  * OO
  * -----------------------------------------------------------------------*/
 
-typedef int32 ChachedOORegs;
+typedef uintptr_t ChachedOORegs;
 
 inline
 Object *getObject(ChachedOORegs regs)

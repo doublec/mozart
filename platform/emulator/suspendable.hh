@@ -94,14 +94,14 @@ enum SuspendableFlags {
 
 class Suspendable {
 protected:
-  int     flags;
+  uintptr_t     flags;
   Board * board;
 
 public:
   NO_DEFAULT_CONSTRUCTORS(Suspendable);
   USEFREELISTMEMORY;
 
-  Suspendable(int f, Board * b) : flags(f), board(b) {}
+  Suspendable(uintptr_t f, Board * b) : flags(f), board(b) {}
 
 
   /*
@@ -112,7 +112,7 @@ public:
   }
   void cacMark(Suspendable * fwd) {
     Assert(!isCacMarked());
-    flags = ((int32) fwd) | SF_GcMark ; 
+    flags = ((uintptr_t) fwd) | SF_GcMark ; 
   }
   Suspendable * cacGetFwd(void) {
     Assert(isCacMarked());

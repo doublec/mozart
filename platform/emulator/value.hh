@@ -135,7 +135,7 @@ public:
 class Name: public Literal {
 protected:
   static int NameCurrentNumber;
-  int32 homeOrGName;
+  uintptr_t homeOrGName;
 public:
   NO_DEFAULT_CONSTRUCTORS(Name)
   static Name *newName(Board *b);
@@ -1275,7 +1275,7 @@ TaggedRef makeTupleArityList(int i);
  * either an Arity* or an int
  */
 
-typedef int32 SRecordArity; /* do not want to use a pointer on the Alpha! */
+typedef uintptr_t SRecordArity; /* do not want to use a pointer on the Alpha! */
 
 inline 
 int sraIsTuple(SRecordArity a) {
@@ -1561,7 +1561,7 @@ OZ_Term getArityList(OZ_Term term)
 }
 
 inline
-int getWidth(OZ_Term term)
+int getTermWidth(OZ_Term term)
 {
   if (oz_isSRecord(term)) {
     return tagged2SRecord(term)->getWidth();

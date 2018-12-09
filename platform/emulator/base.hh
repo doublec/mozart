@@ -130,13 +130,13 @@ const Bool FALSE = 0;
 
 typedef unsigned char BYTE;
 
-typedef int32 ByteCode;
+typedef uintptr_t ByteCode;
 
 typedef ByteCode *ProgramCounter;
 
 #define NOCODE ((ProgramCounter) -1l)
 
-typedef int32 PosInt;
+typedef uintptr_t PosInt;
 
 typedef PosInt XReg;
 typedef PosInt YReg;
@@ -144,7 +144,7 @@ typedef PosInt GReg;
 
 typedef uintptr_t TaggedRef;
 
-typedef unsigned int32 crc_t;
+typedef uint32 crc_t;
 
 enum PropCaller {
   pc_propagator = 0,

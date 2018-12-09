@@ -139,11 +139,11 @@ enum ltag_t {
  *
  */
 
-#define __ltag_ptr(t,lt) ((TaggedRef) (((int) (t))+(lt)))
-#define __stag_ptr(t,st) ((TaggedRef) (((int) (t))+(st)))
+#define __ltag_ptr(t,lt) ((TaggedRef) (((uintptr_t) (t))+(lt)))
+#define __stag_ptr(t,st) ((TaggedRef) (((uintptr_t) (t))+(st)))
 
-#define __ltag_int(t,lt) ((TaggedRef) ((((int) (t))<<LTAG_BITS)+(lt)))
-#define __stag_int(t,st) ((TaggedRef) ((((int) (t))<<STAG_BITS)+(st)))
+#define __ltag_int(t,lt) ((TaggedRef) ((((uintptr_t) (t))<<LTAG_BITS)+(lt)))
+#define __stag_int(t,st) ((TaggedRef) ((((uintptr_t) (t))<<STAG_BITS)+(st)))
 
 #define __unltag_ptr(c,t,lt)   ((c) (((TaggedRef)(t))-(lt)))
 #define __unstag_ptr(c,t,st)   ((c) (((TaggedRef)(t))-(st)))
@@ -576,10 +576,10 @@ void *tagged2Addr(TaggedRef t);
 
 class Tagged2 {
 private:
-  uint32 tagged;
+  uintptr_t tagged;
   void checkTag(int tag)       { Assert(tag >=0 && tag <=__tagged2Mask); }
   void checkVal(uint32 val)    { Assert((val & (__tagged2Mask<<(32-__tagged2Bits))) == 0); }
-  void checkPointer(void* ptr) { Assert((((uint32) ptr)&__tagged2Mask) == 0); }
+  void checkPointer(void* ptr) { Assert((((uintptr_t) ptr)&__tagged2Mask) == 0); }
 public:
 
   int     getTag()  { return (tagged&__tagged2Mask); }
@@ -589,7 +589,7 @@ public:
   void set(void* ptr,int tag) {
     checkPointer(ptr);
     checkTag(tag);
-    tagged = ((uint32)ptr) | tag;
+    tagged = ((uintptr_t)ptr) | tag;
   }
   void set(uint32 val,int tag) {
     checkTag(tag);
@@ -598,7 +598,7 @@ public:
   }
   void setPtr(void* ptr) {
     checkPointer(ptr);
-    tagged = ((uint32)ptr) | getTag();
+    tagged = ((uintptr_t)ptr) | getTag();
   }
   void setTag(int tag) {
     checkTag(tag);
