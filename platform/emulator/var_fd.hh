@@ -133,7 +133,7 @@ public:
   // tagging and untagging constrained variables
   //
   OZ_FDIntVar * getTag(void) {
-    return (OZ_FDIntVar *)  ((uintptr_t)u.var_type & ~u_mask);
+    return (OZ_FDIntVar *)  ((uintptr_t)u.cpi_fd_var & ~u_mask);
   }
   //
   // end of tagging ...
