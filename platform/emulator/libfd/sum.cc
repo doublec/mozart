@@ -78,7 +78,7 @@ OZ_BI_end
 
 #include "sum_filter.hh"
 
-template unsigned int make_lessEqOffsetN<unsigned int, PropagatorExpect, unsigned int>(unsigned int, PropagatorExpect &, unsigned int, unsigned int, unsigned int);
+template uintptr_t make_lessEqOffsetN<uintptr_t, PropagatorExpect, uintptr_t>(uintptr_t, PropagatorExpect &, uintptr_t, uintptr_t, uintptr_t);
 
 OZ_BI_define(fdp_sumC, 4, 0)
 {

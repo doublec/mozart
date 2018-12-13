@@ -81,7 +81,7 @@ extern "C" {
 
 typedef uintptr_t OZ_Term;
 
-typedef unsigned int OZ_Return;
+typedef uintptr_t OZ_Return;
 
 #define OZ_FAILED      0
 #define FAILED         OZ_FAILED

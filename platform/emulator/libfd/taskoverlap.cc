@@ -52,7 +52,7 @@ OZ_Return TasksOverlapPropagator::propagate(void)
   return r;
 }
 
-template unsigned int make_tasksoverlap<unsigned int, OZ_Expect, unsigned int>(unsigned int, OZ_Expect &, unsigned int, unsigned int, unsigned int, unsigned int, unsigned int);
+template uintptr_t make_tasksoverlap<uintptr_t, OZ_Expect, uintptr_t>(uintptr_t, OZ_Expect &, uintptr_t, uintptr_t, uintptr_t, uintptr_t, uintptr_t);
 
 OZ_BI_define(fdp_tasksOverlap, 5, 0)
 {

@@ -132,7 +132,7 @@ public:
     _current_params = 0;
     return 0;
   }
-  int expectVar(_PEL_EventList * el, int &r) {
+  uintptr_t expectVar(_PEL_EventList * el, uintptr_t &r) {
     _PEL_EventList * _el = el;
     _ela[_current_params] = _el;
     _current_params += 1;
@@ -140,16 +140,16 @@ public:
     r = 0;
     return 0;
   }
-  int expectIntVarBounds(PEL_PersistentFDIntVar &fdv) {
+  uintptr_t expectIntVarBounds(PEL_PersistentFDIntVar &fdv) {
     _PEL_EventList * el = &(fdv.getEventLists().getBounds());
-    int r;
+    uintptr_t r;
     return expectVar(el, r);
   }
-  int expectIntVarBounds(PEL_PersistentFDIntVar &fdv, int &r) {
+  uintptr_t expectIntVarBounds(PEL_PersistentFDIntVar &fdv, uintptr_t &r) {
     _PEL_EventList * el = &(fdv.getEventLists().getBounds());
     return expectVar(el, r);
   }
-  int expectInt(OZ_Term v, int &r) {
+  uintptr_t expectInt(OZ_Term v, uintptr_t &r) {
     r = 0;
     return 0;
   }

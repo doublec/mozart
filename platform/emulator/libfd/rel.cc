@@ -66,7 +66,7 @@ failure:
 
 //-----------------------------------------------------------------------------
 
-template int make_lessEqOffset<int, OZ_Propagator, OZ_FDIntVar, unsigned int>(int, OZ_Propagator &, OZ_FDIntVar, OZ_FDIntVar, unsigned int);
+template int make_lessEqOffset<int, OZ_Propagator, OZ_FDIntVar, uintptr_t>(int, OZ_Propagator &, OZ_FDIntVar, OZ_FDIntVar, uintptr_t);
 
 //#define TMUELLER
 
