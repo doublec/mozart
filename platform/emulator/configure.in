@@ -302,8 +302,11 @@ if test "${GXX}" = yes; then
 	esac
 	;;
     linux-x86_64)
-        oz_opt="-O3 -pipe -fno-strict-aliasing"
-	oz_om="-m32 -march=x86_64 -mtune=generic -fomit-frame-pointer -fno-tree-vrp"
+#        oz_opt="-g -O3 -pipe -fno-strict-aliasing"
+#	oz_om="--g m32 -march=x86_64 -mtune=generic -fomit-frame-pointer -fno-tree-vrp"
+#        oz_copt_debug="-g3 -DINTERFACE -fno-inline -fno-default-inline -fno-inline-functions"
+        oz_opt="-g -fno-strict-aliasing -fno-inline -fno-default-include -fno-include-functions"
+	oz_om="-g -march=x86_64 -mtune=generic -fno-tree-vrp"
         oz_copt_debug="-g3 -DINTERFACE -fno-inline -fno-default-inline -fno-inline-functions"
 	EMULATE_CXXFLAGS=-finline-limit=500
         ;;
@@ -343,8 +346,8 @@ case $platform in
 	oz_enable_modules_static=yes
 	;;
     linux-x86_64)
-        TOOLLDCMD="gcc -shared"
-        LDFLAGS="$LDFLAGS"
+        TOOLLDCMD="gcc -g -shared"
+        LDFLAGS="$LDFLAGS -g"
 	: ${oz_enable_modules_static=no}
 	;;
     linux-x86_64_32)
