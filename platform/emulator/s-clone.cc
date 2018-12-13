@@ -39,7 +39,7 @@ public:
   CpTrail() : FastStack() {}
   ~CpTrail() {}
   
-  void save(int * p) {
+  void save(uintptr_t * p) {
     // Save content and address
     push2((StackEntry) *p, (StackEntry) p);
   }
@@ -48,8 +48,8 @@ public:
     while (!isEmpty()) {
       StackEntry e1, e2;
       pop2(e1,e2);
-      int * p = (int *) e2;
-      int   v = (int)   e1;
+      uintptr_t * p = (uintptr_t *) e2;
+      uintptr_t   v = (uintptr_t)   e1;
       *p = v;
     } 
   }

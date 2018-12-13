@@ -173,7 +173,7 @@ Segment::~Segment()
   }
   writer = 0;
 } 
-typedef uint32 bitVec;
+typedef uintptr_t bitVec;
 
 // xMaxSize is the maximum number of registers we can cache. If the
 // max live register is greater than this value then we quietly don't

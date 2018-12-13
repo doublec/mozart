@@ -267,22 +267,22 @@ public:
   // tagging and untagging constrained variables
   //
   void setStoreFlag(void) {
-    suspList = (SuspList *) (((long) suspList) | STORE_FLAG);
+    suspList = (SuspList *) (((uintptr_t) suspList) | STORE_FLAG);
   }
   void resetStoreFlag(void) {
-    suspList = (SuspList *) (((long) suspList) & ~STORE_FLAG);
+    suspList = (SuspList *) (((uintptr_t) suspList) & ~STORE_FLAG);
   }
   OZ_Boolean testStoreFlag(void) {
-    return ((long)suspList) & STORE_FLAG;
+    return ((uintptr_t)suspList) & STORE_FLAG;
   }
   void setReifiedFlag(void) {
-    suspList = (SuspList *) (((long) suspList) | REIFIED_FLAG);
+    suspList = (SuspList *) (((uintptr_t) suspList) | REIFIED_FLAG);
   }
   void resetReifiedFlag(void) {
-    suspList = (SuspList *) (((long) suspList) & ~REIFIED_FLAG);
+    suspList = (SuspList *) (((uintptr_t) suspList) & ~REIFIED_FLAG);
   }
   OZ_Boolean testReifiedFlag(void) {
-    return ((long)suspList) & REIFIED_FLAG;
+    return ((uintptr_t)suspList) & REIFIED_FLAG;
   }
   //
   void dropPropagator(Propagator *);
@@ -361,6 +361,7 @@ public:
     suspList = oz_installPropagators(suspList,
 				     glob_var->getSuspList(),
 				     glob_var->getBoardInternal());
+
   }
 
 };

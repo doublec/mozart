@@ -322,7 +322,7 @@ void exitCheckSpace() {
 
 #ifdef S_CLONE
 
-#define CPTRAIL(p) cpTrail.save(((int *) p))
+#define CPTRAIL(p) cpTrail.save(((uintptr_t *) p))
 
 #else
 
@@ -340,17 +340,17 @@ void exitCheckSpace() {
  */
 #define STOREFWDNOMARK(fromPtr, newValue)		\
   CPTRAIL(fromPtr);					\
-  *((int32 *) fromPtr) = ToInt32(newValue);
+  *((uintptr_t *) fromPtr) = ToInt32(newValue);
 
 #define STOREFWDMARK(fromPtr, newValue)			\
   Assert(isSTAligned(newValue));			\
   CPTRAIL(fromPtr);					\
-  *((int32 *) fromPtr) = makeTaggedMarkPtr(newValue);
+  *((uintptr_t *) fromPtr) = makeTaggedMarkPtr(newValue);
 
 #define STOREPSEUDOFWDMARK(fromPtr, newValue)		\
   Assert(!isSTAligned(newValue));			\
   CPTRAIL(fromPtr);					\
-  *((int32 *) fromPtr) = makeTaggedRef(newValue);
+  *((uintptr_t *) fromPtr) = makeTaggedRef(newValue);
 
 #define STOREFWDFIELD(d,t)				\
   CPTRAIL(d->cacGetMarkField());			\
@@ -2093,7 +2093,7 @@ void SuspQueue::_cac(void) {
 
   SuspList * head = last->getNext();
 
-  CPTRAIL((int32 *) last->getNextRef());
+  CPTRAIL((uintptr_t *) last->getNextRef());
 
   last->setNext(NULL);
 
