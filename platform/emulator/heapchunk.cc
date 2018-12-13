@@ -69,7 +69,7 @@ public:
     return oz_pair2(oz_atom("<HeapChunk "),
 		    oz_pair2(oz_int((int)chunk_size),
 			     oz_pair2(oz_atom(" @"),
-				      oz_pair2(oz_int((int)this),
+				      oz_pair2(oz_int((uintptr_t)this),
 					       oz_atom(">")))));
 /*
   char * data = chunk_data;

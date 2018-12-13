@@ -977,8 +977,8 @@ urlc::get_ftp(char *file)
     free(nodename);
     if(NULL == hp)
 	return (URLC_EINVAL);
-    char port_val[25] = ""; // space for constructing the PORT parameter
-    for(n = 0; n < 25; n++)
+    char port_val[50] = ""; // space for constructing the PORT parameter
+    for(n = 0; n < 50; n++)
 	port_val[n] = 0; // preventive fill
 
     // use the sin_addr obtained by tcpip_open,

@@ -197,7 +197,7 @@ public:
     return (Board *)(homeAndFlags&~SVAR_FLAGSMASK);
   }
   void setHome(Board *h) {
-    homeAndFlags = (homeAndFlags&SVAR_FLAGSMASK)|((unsigned)h);
+    homeAndFlags = (homeAndFlags&SVAR_FLAGSMASK)|((uintptr_t)h);
   }
 
   Bool isTrailed(void) {
@@ -330,7 +330,7 @@ public:
   }
 
   void * getRaw(void) {
-    return (void *)(u.var_type & ~u_mask);
+    return (void *)(uintptr_t)(u.var_type & ~u_mask);
   }
   void * getRawAndUntag(void) {
     void * raw = getRaw();

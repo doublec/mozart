@@ -100,18 +100,18 @@ public:
   
   void push(void * ptr, ptrtag_t tag) {
     Assert(isSTAligned(ptr));
-    FastStack::push1((StackEntry) (((unsigned int) ptr) | tag));
+    FastStack::push1((StackEntry) (((uintptr_t) ptr) | tag));
   }
 
   void pushSuspList(SuspList ** sl) {
     FastStack::push2((StackEntry) NULL, 
-		     (StackEntry) (((unsigned int) sl) | PTR_SUSPLIST));
+		     (StackEntry) (((uintptr_t) sl) | PTR_SUSPLIST));
   }
 
   void pushLocalSuspList(Board * bb, SuspList ** sl, int n) {
     Assert(isSTAligned(bb) && n<8);
-    FastStack::push2((StackEntry) (((unsigned int) bb) | n), 
-		     (StackEntry) (((unsigned int) sl) | PTR_SUSPLIST));
+    FastStack::push2((StackEntry) (((uintptr_t) bb) | n), 
+		     (StackEntry) (((uintptr_t) sl) | PTR_SUSPLIST));
   }
 
   void gCollectRecurse(void);

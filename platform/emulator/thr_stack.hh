@@ -193,7 +193,7 @@ public:
     pushFrame(C_SET_SELF_Ptr, 0, o);
   }
   void pushAbstr(PrTabEntry  *a) { 
-    pushFrame(C_SET_ABSTR_Ptr, a, ToPointer(invoc_counter++)); 
+    pushFrame(C_SET_ABSTR_Ptr, a, ToPointer((uintptr_t)invoc_counter++)); 
   }
   int tasks();
 

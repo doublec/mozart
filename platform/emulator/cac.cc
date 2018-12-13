@@ -2203,14 +2203,14 @@ void LTuple::_cacRecurse() {
 }
 
 
-#define UTG_PTR(ptr,tag,type) ((type) (((unsigned int) (ptr)) - (tag)))
+#define UTG_PTR(ptr,tag,type) ((type) (((uintptr_t) (ptr)) - (tag)))
 
 void CacStack::_cacRecurse(void) {
 
   while (!isEmpty()) {
     StackEntry tp;
     pop1(tp);
-    ptrtag_t ptag = (ptrtag_t) (((unsigned int) tp) & PTR_MASK);
+    ptrtag_t ptag = (ptrtag_t) (((uintptr_t) tp) & PTR_MASK);
     
     switch (ptag) {
     case PTR_LTUPLE:    
@@ -2239,8 +2239,8 @@ void CacStack::_cacRecurse(void) {
 	pop1(e);
 	
 	if (e) {
-	  unsigned int n = ((unsigned int) e) & PTR_MASK;
-	  Board * bb     = (Board *) (((unsigned int) e) - n);
+	  uintptr_t n = ((uintptr_t) e) & PTR_MASK;
+	  Board * bb     = (Board *) (((uintptr_t) e) - n);
 	  
 	  for (int i = n; i--; )
 	    slp[i] = slp[i]->_cacLocalRecurse(bb);

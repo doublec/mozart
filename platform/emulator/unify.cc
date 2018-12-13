@@ -378,7 +378,7 @@ next:
 push:
   if (argSize>1) {
     unifyStack.ensureFree(3);
-    unifyStack.push(ToPointer(argSize-1),NO);
+    unifyStack.push(ToPointer((uintptr_t)(argSize-1)),NO);
     unifyStack.push(termPtr1+1,NO);
     unifyStack.push(termPtr2+1,NO);
   }

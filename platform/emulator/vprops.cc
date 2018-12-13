@@ -770,7 +770,7 @@ OZ_Return SetEmulatorProperty(EmulatorPropertyIndex prop,OZ_Term val) {
     if (oz_isVar(val))
       return SUSPEND;
     
-  int      INT__;
+  uintptr_t      INT__;
   SRecord* REC__;
   switch (prop) {
     // TIME

@@ -105,10 +105,10 @@ template <class FDVAR>
 class PEL_Filter {
 private:
   int _r;
-  _PropagatorController_V_V<int,
+  _PropagatorController_V_V<uintptr_t,
     FDVAR,pf_entailed,pf_failed,pf_sleep> * _iter;
 public:
-  PEL_Filter(_PropagatorController_V_V<int,
+  PEL_Filter(_PropagatorController_V_V<uintptr_t,
     FDVAR,pf_entailed,pf_failed,pf_sleep> &iter) : _iter(&iter), _r(-1) {}
   PEL_Filter &entail(void) {
     CDM(("PEL_Filter::entail()\n"));
@@ -136,7 +136,7 @@ pf_return_t PEL_LessEqOffset<ENGINE, FDVAR, PFDVAR>::propagate(PEL_Engine &e)
   int c = this->_c;
   FDVAR &y = *(FDVAR *) e[this->_y];
   //
-  _PropagatorController_V_V<int,
+  _PropagatorController_V_V<uintptr_t,
     FDVAR,pf_entailed,pf_failed,pf_sleep> iter(x, y);
   PEL_Filter<FDVAR> s(iter);
   //

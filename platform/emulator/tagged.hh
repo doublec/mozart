@@ -578,12 +578,12 @@ class Tagged2 {
 private:
   uintptr_t tagged;
   void checkTag(int tag)       { Assert(tag >=0 && tag <=__tagged2Mask); }
-  void checkVal(uint32 val)    { Assert((val & (__tagged2Mask<<(32-__tagged2Bits))) == 0); }
+  void checkVal(uintptr_t val)    { Assert((val & (__tagged2Mask<<(32-__tagged2Bits))) == 0); }
   void checkPointer(void* ptr) { Assert((((uintptr_t) ptr)&__tagged2Mask) == 0); }
 public:
 
   int     getTag()  { return (tagged&__tagged2Mask); }
-  uint32  getData() { return tagged>>__tagged2Bits; }
+  uintptr_t  getData() { return tagged>>__tagged2Bits; }
   void*   getPtr()  { return (void*)(tagged&~__tagged2Mask); }
 
   void set(void* ptr,int tag) {
@@ -591,7 +591,7 @@ public:
     checkTag(tag);
     tagged = ((uintptr_t)ptr) | tag;
   }
-  void set(uint32 val,int tag) {
+  void set(uintptr_t val,int tag) {
     checkTag(tag);
     checkVal(val);
     tagged = (val<<__tagged2Bits) | tag;
@@ -612,14 +612,14 @@ public:
     checkTag(tag & __tagged2Mask);
     tagged = tagged & (tag | ~__tagged2Mask);
   }
-  void setVal(uint32 val) {
+  void setVal(uintptr_t val) {
     checkVal(val);
     tagged = (val<<__tagged2Bits) | getTag();
   }
 
   Tagged2()                   { tagged = 0; }
   Tagged2(void* ptr,int tag)  { set(ptr,tag); }
-  Tagged2(uint32 val,int tag) { set(val,tag); }
+  Tagged2(uintptr_t val,int tag) { set(val,tag); }
 
 };
 

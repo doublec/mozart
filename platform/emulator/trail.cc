@@ -70,7 +70,7 @@ void Trail::pushMark(void) {
   StackEntry * top = tos-1;
 
   do {
-    switch ((TeType) (int) *top) {
+    switch ((TeType) (uintptr_t) *top) {
     case Te_Mark:
       goto exit;
     case Te_Variable: {
@@ -98,7 +98,7 @@ void Trail::test(void) {
   StackEntry * top = tos-1;
 
   do {
-    switch ((TeType) (int) *top) {
+    switch ((TeType) (uintptr_t) *top) {
     case Te_Mark:
       goto exit;
     case Te_Variable: {
@@ -147,7 +147,7 @@ void Trail::popMark(void) {
   StackEntry * top = tos-1;
 
   do {
-    switch ((TeType) (int) *top) {
+    switch ((TeType) (uintptr_t) *top) {
     case Te_Mark:
       return;
     case Te_Variable: {

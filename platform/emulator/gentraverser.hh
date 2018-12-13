@@ -216,7 +216,7 @@ public:
 
   //
   // For special 'GenTraverser' machinery: handling code areas, etc.
-  void putInt(int32 i) {
+  void putInt(uintptr_t i) {
     checkConsistency();
     *tos++ = ToPointer(i);
   }
@@ -226,7 +226,7 @@ public:
     DebugCode(rbuf.save(tos-1, *(tos-1)));
     return (ToInt32(*(--tos)));
   }
-  int32 lookupInt() {
+  uintptr_t lookupInt() {
     checkConsistency();
     DebugCode(rbuf.save(tos-1, *(tos-1)));
     return (ToInt32(topElem()));
@@ -1068,29 +1068,29 @@ public:
 
 #define PutBTTask(frame,type)				\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
-  DebugCode(*(frame+1) = ToPointer(0xffffffff););	\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
+  DebugCode(*(frame+1) = ToPointer((uintptr_t)-1););	\
   *(frame+2) = ToPointer(type);				\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTTaskPtr(frame,type,ptr)			\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
   *(frame+1) = ptr;					\
   *(frame+2) = ToPointer(type);				\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTTaskArg(frame,type,arg)			\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
-  *(frame+1) = ToPointer(arg);				\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
+  *(frame+1) = ToPointer((uintptr_t)arg);				\
   *(frame+2) = ToPointer(type);				\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTTask2Args(frame,type,arg1,arg2)		\
 {							\
-  DebugCode(*(frame) = ToPointer(arg2););		\
-  *(frame+1) = ToPointer(arg1);				\
+  DebugCode(*(frame) = ToPointer((uintptr_t)arg2););		\
+  *(frame+1) = ToPointer((uintptr_t)arg1);				\
   *(frame+2) = ToPointer(type);				\
   frame = frame + bsFrameSize;				\
 }
@@ -1103,7 +1103,7 @@ public:
 }
 #define PutBTTaskPtrArg(frame,type,ptr,arg)		\
 {							\
-  *(frame) = ToPointer(arg);				\
+  *(frame) = ToPointer((uintptr_t)arg);				\
   *(frame+1) = ptr;					\
   *(frame+2) = ToPointer(type);				\
   frame = frame + bsFrameSize;				\
@@ -1112,58 +1112,58 @@ public:
 //
 #define PutBTEmptyFrame(frame)				\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
-  DebugCode(*(frame+1) = ToPointer(0xffffffff););	\
-  DebugCode(*(frame+2) = ToPointer(0xffffffff););	\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
+  DebugCode(*(frame+1) = ToPointer((uintptr_t)-1););	\
+  DebugCode(*(frame+2) = ToPointer((uintptr_t)-1););	\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTFramePtr(frame,ptr)			\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
-  DebugCode(*(frame+1) = ToPointer(0xffffffff););	\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
+  DebugCode(*(frame+1) = ToPointer((uintptr_t)-1););	\
   *(frame+2) = ptr;					\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTFrameArg(frame,arg)			\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
-  DebugCode(*(frame+1) = ToPointer(0xffffffff););	\
-  *(frame+2) = ToPointer(arg);				\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
+  DebugCode(*(frame+1) = ToPointer((uintptr_t)-1););	\
+  *(frame+2) = ToPointer((uintptr_t)arg);				\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTFrame2Ptrs(frame,ptr1,ptr2)		\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
   *(frame+1) = ptr2;					\
   *(frame+2) = ptr1;					\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTFramePtrArg(frame,ptr,arg)			\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
-  *(frame+1) = ToPointer(arg);				\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
+  *(frame+1) = ToPointer((uintptr_t)arg);				\
   *(frame+2) = ptr;					\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTFrame2PtrsArg(frame,ptr1,ptr2,arg)		\
 {							\
-  *(frame) = ToPointer(arg);				\
+  *(frame) = ToPointer((uintptr_t)arg);				\
   *(frame+1) = ptr2;					\
   *(frame+2) = ptr1;					\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTFrame2Args(frame,arg1,arg2)		\
 {							\
-  DebugCode(*(frame) = ToPointer(0xffffffff););		\
-  *(frame+1) = ToPointer(arg2);				\
-  *(frame+2) = ToPointer(arg1);				\
+  DebugCode(*(frame) = ToPointer((uintptr_t)-1););		\
+  *(frame+1) = ToPointer((uintptr_t)arg2);				\
+  *(frame+2) = ToPointer((uintptr_t)arg1);				\
   frame = frame + bsFrameSize;				\
 }
 #define PutBTFrame3Args(frame,arg1,arg2,arg3)		\
 {							\
-  *(frame) = ToPointer(arg3);				\
-  *(frame+1) = ToPointer(arg2);				\
-  *(frame+2) = ToPointer(arg1);				\
+  *(frame) = ToPointer((uintptr_t)arg3);				\
+  *(frame+1) = ToPointer((uintptr_t)arg2);				\
+  *(frame+2) = ToPointer((uintptr_t)arg1);				\
   frame = frame + bsFrameSize;				\
 }
 
@@ -1204,14 +1204,14 @@ public:
   }
 
   //
-  void putTask(BuilderTaskType type, void* ptr1, uint32 arg2) {
+  void putTask(BuilderTaskType type, void* ptr1, uintptr_t arg2) {
     StackEntry *newTop = Stack::ensureFree(bsFrameSize);
     *(newTop) = ToPointer(arg2);
     *(newTop+1) = ptr1;
     *(newTop+2) = ToPointer(type);
     setTop(newTop + bsFrameSize);
   }
-  void putTask(BuilderTaskType type, uint32 arg1, uint32 arg2) {
+  void putTask(BuilderTaskType type, uintptr_t arg1, uintptr_t arg2) {
     StackEntry *newTop = Stack::ensureFree(bsFrameSize);
     *(newTop) = ToPointer(arg2);
     *(newTop+1) = ToPointer(arg1);
@@ -1220,7 +1220,7 @@ public:
   }
   void putTask(BuilderTaskType type, void* ptr) {
     StackEntry *newTop = Stack::ensureFree(bsFrameSize);
-    DebugCode(*(newTop) = ToPointer(0xffffffff););
+    DebugCode(*(newTop) = ToPointer((uintptr_t)-1););
     *(newTop+1) = ptr;
     *(newTop+2) = ToPointer(type);
     setTop(newTop + bsFrameSize);
@@ -1232,24 +1232,24 @@ public:
     *(newTop+2) = ToPointer(type);
     setTop(newTop + bsFrameSize);
   }
-  void putTask(BuilderTaskType type, uint32 arg) {
+  void putTask(BuilderTaskType type, uintptr_t arg) {
     StackEntry *newTop = Stack::ensureFree(bsFrameSize);
-    DebugCode(*(newTop) = ToPointer(0xffffffff););
+    DebugCode(*(newTop) = ToPointer((uintptr_t)-1););
     *(newTop+1) = ToPointer(arg);
     *(newTop+2) = ToPointer(type);
     setTop(newTop + bsFrameSize);
   }
-  void putTask2ndArg(BuilderTaskType type, uint32 arg) {
+  void putTask2ndArg(BuilderTaskType type, uintptr_t arg) {
     StackEntry *newTop = Stack::ensureFree(bsFrameSize);
     *(newTop) = ToPointer(arg);
-    DebugCode(*(newTop+1) = ToPointer(0xffffffff););
+    DebugCode(*(newTop+1) = ToPointer((uintptr_t)-1););
     *(newTop+2) = ToPointer(type);
     setTop(newTop + bsFrameSize);
   }
   void putTask(BuilderTaskType type) {
     StackEntry *newTop = Stack::ensureFree(bsFrameSize);
-    DebugCode(*(newTop) = ToPointer(0xffffffff););
-    DebugCode(*(newTop+1) = ToPointer(0xffffffff););
+    DebugCode(*(newTop) = ToPointer((uintptr_t)-1););
+    DebugCode(*(newTop+1) = ToPointer((uintptr_t)-1););
     *(newTop+2) = ToPointer(type);
     setTop(newTop + bsFrameSize);
   }

@@ -61,7 +61,7 @@ public:
     return 
       OZ_mkTupleC("#",4,
 		  oz_atom("bit array: "), oz_int(upperBound - lowerBound - 1),
-		  oz_atom(" bits at "),   oz_int((int)this));
+		  oz_atom(" bits at "),   oz_int((uintptr_t)this));
   }
 
   virtual OZ_Return getFeatureV(OZ_Term,OZ_Term&);

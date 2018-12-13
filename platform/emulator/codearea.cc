@@ -177,7 +177,7 @@ TaggedRef CodeArea::dbgGetDef(ProgramCounter PC, ProgramCounter definitionPC,
 	oz_cons(OZ_pair2(AtomFile,file),
 	    oz_cons(OZ_pair2(AtomLine,OZ_int(line < 0? -line: line)),
 		oz_cons(OZ_pair2(AtomColumn,OZ_int(colum)),
-		    oz_cons(OZ_pair2(AtomPC,OZ_int((int) PC)),
+		    oz_cons(OZ_pair2(AtomPC,OZ_int((uintptr_t) PC)),
 			oz_cons(OZ_pair2(AtomKind,AtomCall),
 			    oz_cons(OZ_pair2(AtomOrigin,AtomProcedureFrame),
 				pairlist)))))));
@@ -1456,7 +1456,7 @@ void CodeArea::init(void **instrTable)
 #ifndef INLINEOPCODEMAP
   opcodeTable = new AddressHashTable((int) (OZERROR*1.5));
   for (int i=0; i<=OZERROR; i++) {
-    opcodeTable->htAdd(globalInstrTable[i], ToPointer(i));
+    opcodeTable->htAdd(globalInstrTable[i], ToPointer((uintptr_t)i));
   }
 #endif
 #endif

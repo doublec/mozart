@@ -114,7 +114,7 @@ public:
   // tagging and untagging constrained variables
   //
   OZ_FSetVar * getTag(void) {
-    return (OZ_FSetVar *)  (u.var_type & ~u_mask);
+    return (OZ_FSetVar *)  (uintptr_t)(u.var_type & ~u_mask);
   }
   //
   // end of tagging ...

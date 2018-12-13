@@ -70,7 +70,7 @@ TaggedRef TaskStack::frameToRecord(Frame *&frame, Thread *thread, Bool verbose)
 
   if (PC == C_DEBUG_CONT_Ptr) {
     OzDebug *dbg = (OzDebug *) Y;
-    Atom * dothis = (Atom *) (int) G;
+    Atom * dothis = (Atom *) (uintptr_t) G;
     return dbg->toRecord((dothis == DBG_EXIT_ATOM)? AtomExit: AtomEntry,
 			 thread,frameId);
   }
@@ -330,7 +330,7 @@ void TaskStack::unleash(int frameId) {
       dothislater = DBG_STEP_ATOM;
     GetFrame(auxtos,PC,Y,G);
     if (PC == C_DEBUG_CONT_Ptr) {
-      Atom * dothis = (Atom *) (int) G;
+      Atom * dothis = (Atom *) (uintptr_t) G;
       if (dothis != DBG_EXIT_ATOM)
 	ReplaceFrame(auxtos,PC,Y,dothislater);
     } else if (PC == C_EMPTY_STACK)
