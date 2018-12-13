@@ -178,8 +178,8 @@ public:
     Assert(cacIsMarked());
     return (Board *) UnMarkPointer(parent,1);
   }
-  int32 ** cacGetMarkField(void) {
-    return (int32 **) &parent;
+  uintptr_t ** cacGetMarkField(void) {
+    return (uintptr_t **) &parent;
   }
   void cacMark(Board * fwd) {
     Assert(!cacIsMarked());
