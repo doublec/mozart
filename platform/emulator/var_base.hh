@@ -330,7 +330,7 @@ public:
   }
 
   void * getRaw(void) {
-    return (void *)(uintptr_t)(u.var_type & ~u_mask);
+    return (void *)((uintptr_t)u.cpi_raw & ~u_mask);
   }
   void * getRawAndUntag(void) {
     void * raw = getRaw();
