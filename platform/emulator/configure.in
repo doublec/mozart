@@ -536,6 +536,7 @@ dnl AC_TYPE_PID_T
 dnl AC_TYPE_SIZE_T
 dnl AC_HEADER_TIME
 dnl AC_STRUCT_TM
+AC_TYPE_SIZE_T
 
 dnl *****************************************************************
 dnl Checks for libraries.
@@ -1117,7 +1118,7 @@ fi])
 
 OZ_CHECK_DLOPEN_UNDERSCORE
 
-# AC_CHECK_SIZEOF(int)
+AC_CHECK_SIZEOF([size_t], 4)
 # AC_C_BIGENDIAN
 
 AC_CACHE_CHECK([for little-endianness],

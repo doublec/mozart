@@ -78,12 +78,17 @@ public:
 
 /*
  * Basic aligned allocation routine:
- *  - Supports alignment of 8
+ *  - Supports alignment of 8 on 32-bit
+ *    platforms and 16 on 64-bit platforms.
  *  - OZ_HEAPALIGNMENT MUST BE POWER OF 2
  *
  */
 
+#ifndef SIZEOF_SIZE_T
 #define OZ_HEAPALIGNMENT 8
+#else
+#define OZ_HEAPALIGNMENT (2*SIZEOF_SIZE_T)
+#endif
 
 #ifndef HEAPCURVOLATILE
 #define HEAPCURVOLATILE

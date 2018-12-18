@@ -146,3 +146,6 @@ typedef int socklen_t;
 /* endianness */
 #undef ARCH_LITTLE_ENDIAN
 #undef ARCH_BIG_WORDIAN
+
+/* Used for heap alignment */
+#undef SIZEOF_SIZE_T
