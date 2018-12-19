@@ -320,7 +320,7 @@ Bool smallIntLE(TaggedRef A, TaggedRef B)
 inline
 unsigned int smallIntHash(TaggedRef n)
 {
-  return (((unsigned int) n) >> LTAG_BITS);
+  return (((uintptr_t) n) >> LTAG_BITS);
 }
 
 inline
@@ -342,7 +342,7 @@ Bool smallIntCmp(TaggedRef a, TaggedRef b)
 #define smallIntLess(A,B) (((int) (A)) < ((int) (B)))
 #define smallIntLE(A,B)   (((int) (A)) <= ((int) (B)))
 #define smallIntEq(A,B)   ((A) == (B))
-#define smallIntHash(A)   (((unsigned int) (A)) >> LTAG_BITS)
+#define smallIntHash(A)   (((uintptr_t) (A)) >> LTAG_BITS)
 #define smallIntCmp(A,B)  (((int) (A)) - ((int) (B)))
 
 #endif
@@ -709,6 +709,7 @@ TaggedRef oz_float(double f) {
 BigInt *newBigInt();
 BigInt *newBigInt(long i);
 BigInt *newBigInt(unsigned long i);
+BigInt *newBigInt(uintptr_t i);
 BigInt *newBigInt(int i);
 BigInt *newBigInt(unsigned int i);
 BigInt *newBigInt(char *s);
@@ -885,6 +886,14 @@ TaggedRef oz_ulong(unsigned long l) {
 }
 
 inline
+TaggedRef oz_uintptr_t(uintptr_t i) {
+  if (i > (unsigned long) OzMaxInt) 
+    return makeTaggedConst(newBigInt((unsigned long)i));
+  else
+    return makeTaggedSmallInt((int)i);
+}
+
+inline
 int oz_intToC(TaggedRef term)
 {
   if (oz_isSmallInt(term)) {
@@ -902,6 +911,16 @@ long oz_intToCL(TaggedRef term)
   }
 
   return tagged2BigInt(term)->getLong();
+}
+
+inline
+void* oz_intToCPointer(TaggedRef term)
+{
+  if (oz_isSmallInt(term)) {
+    return (void*)(uintptr_t) tagged2SmallInt(term);
+  }
+
+  return (void*)(uintptr_t)tagged2BigInt(term)->getUnsignedLong();
 }
 
 OZ_Term oz_long(long i);
@@ -1635,6 +1654,7 @@ OZ_Term oz_pair2(OZ_Term t1,OZ_Term t2) {
 
 #define oz_pairA(s1,t)      oz_pair2(oz_atom(s1),t)
 #define oz_pairAI(s1,i)     oz_pair2(oz_atom(s1),oz_int(i))
+#define oz_pairAUIP(s1,i)   oz_pair2(oz_atom(s1),oz_uintptr_t(i))
 #define oz_pairAA(s1,s2)    oz_pair2(oz_atom(s1),oz_atom(s2))
 #define oz_pairAS(s1,s2)    oz_pair2(oz_atom(s1),OZ_string(s2))
 #define oz_pairII(i1,i2)    oz_pair2(oz_int(i1),oz_int(i2))

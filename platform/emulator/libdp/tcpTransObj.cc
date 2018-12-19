@@ -118,13 +118,13 @@ void TCPTransObj::deliver() {
   // ComObj responsible for not doing this unnecesarily, OS-call
   // kost@ : what OS call? I see none..
   Assert(fd != -1);
-  Assert(writeBuffer != (ByteBuffer *) -1);
+  Assert(writeBuffer != (ByteBuffer *) (uintptr_t)-1);
   OZ_registerWriteHandler(fd,tcpTransObj_writeHandler,(void *) this);
 }
 
 void TCPTransObj::readyToReceive() {
   Assert(fd != -1);
-  Assert(readBuffer != (ByteBuffer *) -1);
+  Assert(readBuffer != (ByteBuffer *) (uintptr_t)-1);
   OZ_registerReadHandler(fd,tcpTransObj_readHandler,(void *) this);
 }
 
@@ -430,11 +430,11 @@ void TCPTransController::deleteTransObj(TransObj* transObj)
   delete [] byteBufferManager->deleteByteBuffer(tcpTransObj->readBuffer);
   delete [] byteBufferManager->deleteByteBuffer(tcpTransObj->writeBuffer);
 
-  DebugCode(tcpTransObj->comObj = (ComObj *) -1;);
+  DebugCode(tcpTransObj->comObj = (ComObj *) (uintptr_t)-1;);
   DebugCode(tcpTransObj->bufferSize = -1;);
   DebugCode(tcpTransObj->fd = -1;);
-  DebugCode(tcpTransObj->readBuffer = (ByteBuffer *) -1;);
-  DebugCode(tcpTransObj->writeBuffer = (ByteBuffer *) -1;);
+  DebugCode(tcpTransObj->readBuffer = (ByteBuffer *) (uintptr_t)-1;);
+  DebugCode(tcpTransObj->writeBuffer = (ByteBuffer *) (uintptr_t)-1;);
 
   FreeListEntry *f;
   --wc;

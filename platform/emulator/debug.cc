@@ -57,7 +57,7 @@ TaggedRef OzDebug::toRecord(OZ_Term label, Thread *thread, int frameId) {
 	    oz_cons(OZ_pair2(AtomLine,OZ_int(iline < 0? -iline: iline)),
 		oz_cons(OZ_pair2(AtomColumn,getTaggedArg(PC+3)),
 		    oz_cons(OZ_pair2(AtomOrigin,AtomDebugFrame),
-			oz_cons(OZ_pair2(AtomPC,OZ_int((int) PC)),
+			oz_cons(OZ_pair2(AtomPC,OZ_int((uintptr_t) PC)),
 			    oz_cons(OZ_pair2(AtomKind,getTaggedArg(PC+4)),
 				pairlist)))))));
 

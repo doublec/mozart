@@ -53,7 +53,7 @@ void doConnect(ComObj *comObj) {
   OZ_Term Requestor=OZ_recordInit(oz_atom("requestor"),
 				  oz_cons(oz_pairAA("id",
 						    site->stringrep_notype()),
-					  oz_cons(oz_pairAI("req",(int) comObj),
+					  oz_cons(oz_pairAUIP("req",(uintptr_t) comObj),
 						  oz_nil())));
   OZ_Term LocalOzState=OZ_recordInit(oz_atom("localstate"),
 				     oz_cons(oz_pairA("connectionFunctor",
@@ -100,7 +100,7 @@ inline OZ_Return parseRequestor(OZ_Term requestor,
       OZ_Term t0 = srequestor->getArg(index);
       NONVAR(t0,t);
       if(OZ_isInt(t))
-	comObj=(ComObj *) oz_intToC(t);
+	comObj=(ComObj *) oz_intToCPointer(t);
       else return OZ_FAILED;
 
       // The comObj might be returned and not used which is checked with valid,
@@ -168,8 +168,8 @@ OZ_BI_define(BIgetConnGrant,4,0){
     if(tro!=NULL) {
       return OZ_unify(var,
                       OZ_recordInit(oz_atom("grant"),
-		                    oz_cons(oz_pairAI("key",
-						      (int) tro),
+		                    oz_cons(oz_pairAUIP("key",
+						      (uintptr_t) tro),
 					    oz_nil())));
     }
     else
@@ -191,8 +191,7 @@ OZ_BI_define(BIfreeConnGrant,2,0){
   int index = sgrant->getIndex(oz_atom("key"));
   if (index>=0) { 
     OZ_Term t = sgrant->getArg(index);
-    TransObj *transObj=(TransObj *) OZ_intToC(t);
-
+    TransObj *transObj=(TransObj *) oz_intToCPointer(t);
     transObj->close(FALSE);
   }
   else
@@ -206,8 +205,8 @@ void transObjReady(ComObj *comObj,TransObj *transObj) {
   if(comObj->connectgrantrequested) {
     OZ_unify(comObj->connectVar,
 	     OZ_recordInit(oz_atom("grant"),
-			   oz_cons(oz_pairAI("key",
-					     (int) transObj),
+			   oz_cons(oz_pairAUIP("key",
+					     (uintptr_t) transObj),
 				   oz_nil())));
     OZ_unprotect(&comObj->connectVar);
     OZ_unprotect(&comObj->transtype);
@@ -250,7 +249,7 @@ OZ_BI_define(BIhandover,3,0){
       }
     }
 
-    TransObj *transObj=(TransObj *) OZ_intToC(t);
+    TransObj *transObj=(TransObj *) oz_intToCPointer(t);
     transObj->setUp(comObj->getSite(),comObj,settings);
     if(accepting) {
       comObj->accept(transObj);
@@ -297,7 +296,7 @@ void comObjDone(ComObj *comObj) {
   OZ_Term Requestor=OZ_recordInit(oz_atom("requestor"),
 				  oz_cons(oz_pairAA("id",
 						    comObj->getSite()->stringrep_notype()),
-					  oz_cons(oz_pairAI("req",(int) comObj),
+					  oz_cons(oz_pairAUIP("req",(uintptr_t) comObj),
 						  oz_nil())));
   OZ_Term command=OZ_recordInit(oz_atom("abort"),
 				oz_cons(oz_pair2(oz_int(1),

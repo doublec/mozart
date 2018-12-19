@@ -555,7 +555,7 @@ Bool ComObj::msgReceived(MsgContainer *msgC) {
       } else {
 	// Tell the site about this comObj
 	ComObj *other=s1->setComObj(this);
-	if (other==(ComObj *) -1) {
+	if (other==(ComObj *) (uintptr_t)-1) {
 	  // The comObj is refused since the site is already marked perm.
 	  // abort the channel and return false meaning closed - don't 
 	  // continue reading.
@@ -1056,7 +1056,7 @@ void ComObj::connectionLost() {
 //  	   myDSite->getTimeStamp()->pid,
 //  	   site!=NULL?site->getTimeStamp()->pid:0);
     OZ_error("An unknown connection was lost (%d %x %x %d %d)",
-	     state,(int) transObj,this,
+	     state,(uintptr_t) transObj,this,
 	     myDSite->getTimeStamp()->pid,
 	     site!=NULL?site->getTimeStamp()->pid:0);
     //  printf("An unknown connection was lost");
