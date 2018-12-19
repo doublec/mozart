@@ -41,6 +41,7 @@
 #define LONGBITS    BITS(long)
 #define DOUBLEBITS  BITS(double)
 #define DMAXPOWTWO  ((double)(1L << LONGBITS -2)*(1L << DSIGNIF - LONGBITS +1))
+#define DMAXPOWTWO32  ((double)(1L << 32 -2)*(1L << DSIGNIF - 32 +1))
 
 #else
 
@@ -54,7 +55,7 @@
 inline
 void warn_inexact(double v)
 {
-  if (DMAXPOWTWO < v) {
+  if (DMAXPOWTWO32 < v) {
     printf("System warning (finite domain module): \n");
     printf("\tThe produced result might be incorrect due to\n");
     printf("\tlimited precision of internal computation.");
