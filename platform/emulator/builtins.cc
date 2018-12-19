@@ -2447,7 +2447,11 @@ int multOverflow(int a, int b)
 {
   int absa = ozabs(a);
   int absb = ozabs(b);
-  const int bits = (sizeof(TaggedRef)*8-LTAG_BITS)/2 - 1;
+  /* Use 'int' for overflow size as even on 64-bit platforms
+   * small integers are promoted to big integers when the
+   * size of the int overflows
+   */
+  const int bits = (sizeof(int)*8-LTAG_BITS)/2 - 1;
 
   if (!((absa|absb)>>bits)) /* if none of the 13 MSB in neither a nor b are set */
     return NO;
